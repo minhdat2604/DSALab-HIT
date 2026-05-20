@@ -1,6 +1,6 @@
 # Tuần 2: Mảng & Con Trỏ — Bài tập
 
-## 🎯 Mục tiêu tuần này
+## 🎯 Mục tiêu tuần này.
 Thành thạo mảng 1D/2D, con trỏ, cấp phát động trong C++.
 
 ---
