@@ -10,37 +10,37 @@ Xác định Big-O của 10 đoạn code C++ cho trước. Giải thích tại s
 // 1. O(1): Truy xuất mảng
 int x = arr[5]; 
 
-// 2. O(n): Duyệt mảng 1 lần
+// 2. O(n):
 for(int i = 0; i < n; i++) sum++; 
 
-// 3. O(n): Duyệt mảng bước nhảy lớn (vẫn tỉ lệ thuận với n)
+// 3. O(n):
 for(int i = 0; i < n; i += 2) sum++; 
 
-// 4. O(n): Hai vòng lặp rời nhau (O(n) + O(n) = O(n))
+// 4. O(n):
 for(int i = 0; i < n; i++) sum++;
 for(int j = 0; j < n; j++) sum++;
 
-// 5. O(n²): Hai vòng lặp lồng nhau
+// 5. O(n²)
 for(int i = 0; i < n; i++)
     for(int j = 0; j < n; j++) sum++;
 
-// 6. O(n²): Vòng lặp lồng nhau phụ thuộc index (n*(n-1)/2 bước)
+// 6. O(n²):
 for(int i = 0; i < n; i++)
     for(int j = i; j < n; j++) sum++;
 
-// 7. O(log n): Bước nhảy nhân đôi (Binary Search style)
+// 7. O(log n):
 for(int i = 1; i < n; i *= 2) sum++;
 
-// 8. O(n log n): Vòng lặp ngoài O(n), vòng lặp trong O(log n)
+// 8. O(n log n):
 for(int i = 0; i < n; i++)
     for(int j = 1; j < n; j *= 2) sum++;
 
-// 9. O(n³): Ba vòng lặp lồng nhau
+// 9. O(n³):
 for(int i = 0; i < n; i++)
     for(int j = 0; j < n; j++)
         for(int k = 0; k < n; k++) sum++;
 
-// 10. O(2^n): Đệ quy rẽ nhánh đôi (VD: Fibonacci thuần)
+// 10. O(2^n)
 int fib(int n) {
     if (n <= 1) return n;
     return fib(n-1) + fib(n-2);
@@ -106,10 +106,6 @@ bool twoSum_Fast(const vector<int>& arr, int target) {
     return false;
 }
 
-// ============================================================================
-// BÀI 3: MẢNG CON CÓ TỔNG LỚN NHẤT (MAXIMUM SUBARRAY)
-// ============================================================================
-// Chậm O(n^2): Duyệt và cộng dồn mọi mảng con đầu-cuối
 int maxSubArray_Slow(const vector<int>& arr) {
     int max_sum = arr[0];
     for (size_t i = 0; i < arr.size(); i++) {
@@ -122,7 +118,6 @@ int maxSubArray_Slow(const vector<int>& arr) {
     return max_sum;
 }
 
-// Nhanh O(n): Thuật toán Kadane (Cộng dồn liên tục, nếu âm thì reset về 0)
 int maxSubArray_Fast(const vector<int>& arr) {
     int current_max = arr[0], global_max = arr[0];
     for (size_t i = 1; i < arr.size(); i++) {
@@ -132,9 +127,6 @@ int maxSubArray_Fast(const vector<int>& arr) {
     return global_max;
 }
 
-// ============================================================================
-// ĐO THỜI GIAN THỰC TẾ
-// ============================================================================
 void run_benchmark(const vector<int>& data) {
     auto start = chrono::high_resolution_clock::now();
     containsDuplicate_Slow(data);
@@ -150,7 +142,6 @@ void run_benchmark(const vector<int>& data) {
 }
 
 int main() {
-    // Khởi tạo mảng thử nghiệm 15,000 phần tử tăng dần
     vector<int> test_data(15000);
     for (int i = 0; i < 15000; i++) test_data[i] = i;
 
