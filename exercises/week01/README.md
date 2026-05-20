@@ -249,7 +249,7 @@ int main() {
 
     return 0;
 }
-**Yêu cầu:** dùng `std::chrono`, hiển thị bảng căn chỉnh đẹp, xuất ra file `benchmark.txt`.
+**Yêu cầu:** dùng `std::chrono`, hiển thị bảng căn chỉnh đẹp, xuất ra file `benchmark.txt`..
 
 ---
 📁 Tham khảo: `Chuong1_TongQuan/Chuong1_TongQuan.cpp`
