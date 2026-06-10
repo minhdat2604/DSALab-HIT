@@ -5,39 +5,45 @@
 // ============================================================
 #include <iostream>
 #include <cmath>
+#include <string>
 using namespace std;
 
 // ============================================================
 //  CAU TRUC NUT (NODE)
 // ============================================================
-struct Node {
-    int data;
-    Node *next;
+struct Node {//Nhiệm vụ: Định nghĩa "viên gạch" cấu tạo nên danh sách.
+    int data;//data: Chứa giá trị(ở đây là một số nguyên int)
+    Node *next;//next: Một chiếc "la bàn" (con trỏ) chứa địa chỉ của Node đứng ngay sau nó.
+//Nếu nó là Node cuối cùng, chiếc la bàn này sẽ chỉ vào hư vô(nullptr)
 };
 
 // ============================================================
 //  KHAI BAO DANH SACH
 // ============================================================
-struct List {
-    Node *head;
-    Node *tail;
+struct List {//Nhiệm vụ : Tạo ra "người quản lý" toàn bộ chuỗi Node.
+    Node *head;//head: Luôn đứng ở đầu hàng để biết danh sách bắt đầu từ đâu
+    Node *tail;//tail: Luôn đứng ở cuối hàng. Có ông này thì khi muốn xếp thêm người vào cuối hàng,
+//ta lao thẳng tới cuối luôn chứ không cần lội bộ từ đầu danh sách nữa.
 };
 
 // ============================================================
 //  KHOI TAO VA TIEN ICH
 // ============================================================
 void KhoiTaoDSLK(List &L) {
+     //KhoiTaoDSLK(List & L) : Biến một danh sách mới sinh ra thành danh sách trống bằng cách đặt cả head và tail bằng nullptr
     L.head = L.tail = nullptr;
 }
 
-Node* TaoNode(int x) {
+Node* TaoNode(int x) {//TaoNode(int x): Đi xin máy tính cấp phát một ô nhớ mới trên RAM cho một Node,
+    //nhét giá trị x vào phần data, và tạm thời cho next trỏ vào nullptr.
     Node *p = new Node;
     p->data = x;
     p->next = nullptr;
     return p;
 }
 
-bool DanhSachRong(const List &L) {
+bool DanhSachRong(const List &L) { //DanhSachRong(const List & L) : Kiểm tra nhanh xem danh sách có trống không.
+    //Nếu ông head mà bằng nullptr thì chứng tỏ nhà trống, không có ai
     return L.head == nullptr;
 }
 
@@ -49,15 +55,16 @@ bool DanhSachRong(const List &L) {
 void ThemDau(List &L, int x) {
     Node *p = TaoNode(x);
     if (DanhSachRong(L)) {
-        L.head = L.tail = p;
+        L.head = L.tail = p;//Nếu danh sách đang rỗng, Node này vừa là đầu vừa là cuối(head = tail = p).
     } else {
-        p->next = L.head;
+        p->next = L.head;//Nếu danh sách đã có người, cho Node mới trỏ vào head cũ(p->next = L.head), rồi phong cho Node mới làm head mới
         L.head = p;
     }
 }
 
 // 2-Them vao cuoi
-void ThemCuoi(List &L, int x) {
+void ThemCuoi(List &L, int x) {//Nếu đã có người, nhờ có ông tail đang đứng cuối, ta chỉ cần nối đuôi luôn :
+    //L->tail->next = p.Sau đó dời đô, phong p làm tail mới.
     Node *p = TaoNode(x);
     if (DanhSachRong(L)) {
         L.head = L.tail = p;
@@ -69,6 +76,8 @@ void ThemCuoi(List &L, int x) {
 
 // 3-Them sau node q
 void ThemSau(List &L, Node *q, int x) {
+    //Muốn chèn số mới vào sau Node q.Ta bắt Node mới p kết bạn với phần đuôi phía sau trước(p->next = q->next)
+    // rồi mới cho q trỏ vào p.Nếu q vốn là người cuối hàng(tail), thì giờ đây p sẽ thầu luôn chức tail
     if (q == nullptr) return;
     Node *p = TaoNode(x);
     p->next = q->next;
